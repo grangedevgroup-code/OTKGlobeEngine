@@ -1,6 +1,6 @@
 {
   "name": "otkglobeengine",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A 3D globe map engine for the web: satellite imagery, terrain, roads, labels and 3D buildings, with offline caching.",
   "type": "module",
   "main": "./dist/index.js",
