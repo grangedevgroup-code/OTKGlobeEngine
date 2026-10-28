@@ -623,7 +623,7 @@ private:
     double snapshotFadeLength_ = 0.4;
     Camera snapshotCam_{};
     double settleMoveFade_ = 0.25;
-    bool settleFreeze_ = true;
+    bool settleFreeze_ = false;
     bool uniformLod_ = true;
     bool lines3d_ = true;
     bool bordersReady_ = true;
