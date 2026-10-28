@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Loading
+- The map no longer pauses on a held picture while it loads. The settle hold from 0.1.3 froze the last frame, then moved that frozen picture with the camera while it faded, which looked like a second copy of the view sliding over the map. New imagery now crossfades in place as it arrives, after a pan, a zoom or a map switch. `OTK_SETTLE=1` turns the old hold back on.
+
 ## 0.1.3
 
 ### Opening view
