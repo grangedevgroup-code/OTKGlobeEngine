@@ -6,7 +6,7 @@
     <AssemblyName>OTKGlobeEngine</AssemblyName>
     <RootNamespace>OTKGlobeEngine</RootNamespace>
     <PackageId>OTKGlobeEngine</PackageId>
-    <Version>0.1.3</Version>
+    <Version>0.1.4</Version>
     <Authors>OTKGlobeEngine</Authors>
     <Description>.NET bindings for OTKGlobeEngine, a cross-platform globe map engine for TAK-style applications</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
