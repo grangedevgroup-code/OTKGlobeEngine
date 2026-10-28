@@ -831,7 +831,7 @@ void GlobeRenderer::setLayerList(const std::vector<ImageryLayer>& layers) {
             snapshotFade_ = -1.0;
             settleQuiet_ = 0;
             switchHold_ = true;
-        } else if (fadeUpgrades_) {
+        } else if (fadeUpgrades_ && settleFreeze_) {
             switchWanted_ = true;
         }
     }
