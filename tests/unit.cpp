@@ -1131,7 +1131,13 @@ int main() {
         std::vector<std::uint8_t> bad = packet;
         bad[30] ^= 0x10;
         back = parseUasKlv(bad.data(), bad.size());
-        check(back.size() == 1 && !back[0].checksumOk, "MISB ST 0601 checksum catches corruption");
+        check(back.empty(), "MISB ST 0601 corrupt packet is rejected");
+        std::vector<std::uint8_t> noChecksum = packet;
+        noChecksum.resize(noChecksum.size() - 4);
+        std::size_t lengthAt = (noChecksum[16] & 0x80) ? 16 + (noChecksum[16] & 0x7F) : 16;
+        noChecksum[lengthAt] = static_cast<std::uint8_t>(noChecksum[lengthAt] - 4);
+        back = parseUasKlv(noChecksum.data(), noChecksum.size());
+        check(back.empty(), "MISB ST 0601 packet without a checksum is rejected");
 
         std::vector<std::uint8_t> ts;
         int cc[0x2000] = {};

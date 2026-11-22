@@ -2,6 +2,8 @@
 
 #include "core/geo.hpp"
 
+#include "misb.hpp"
+
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -21,31 +23,6 @@ std::uint16_t bcc16(const std::uint8_t* p, std::size_t n) {
     std::uint16_t sum = 0;
     for (std::size_t i = 0; i < n; ++i) sum = static_cast<std::uint16_t>(sum + (p[i] << (8 * ((i + 1) % 2))));
     return sum;
-}
-
-bool readBer(const std::uint8_t* p, std::size_t size, std::size_t& pos, std::size_t& value) {
-    if (pos >= size) return false;
-    std::uint8_t b = p[pos++];
-    if (b < 0x80) {
-        value = b;
-        return true;
-    }
-    int n = b & 0x7F;
-    if (n == 0 || n > 8 || pos + n > size) return false;
-    value = 0;
-    for (int i = 0; i < n; ++i) value = (value << 8) | p[pos++];
-    return true;
-}
-
-bool readTag(const std::uint8_t* p, std::size_t size, std::size_t& pos, std::uint32_t& tag) {
-    tag = 0;
-    for (int i = 0; i < 5; ++i) {
-        if (pos >= size) return false;
-        std::uint8_t b = p[pos++];
-        tag = (tag << 7) | (b & 0x7F);
-        if (!(b & 0x80)) return true;
-    }
-    return false;
 }
 
 std::uint64_t unsignedValue(const std::uint8_t* v, std::size_t n) {
@@ -112,24 +89,16 @@ void apply(UasMetadata& m, std::uint32_t tag, const std::uint8_t* v, std::size_t
 }
 
 bool parsePacket(const std::uint8_t* p, std::size_t size, std::size_t& consumed, UasMetadata& out) {
-    std::size_t pos = 16, length = 0;
-    if (size < 18 || std::memcmp(p, kUasKey, 16) != 0 || !readBer(p, size, pos, length) || pos + length > size) return false;
-    const std::size_t end = pos + length;
-    consumed = end;
+    auto packet = misb::st0601::Packet::parse(p, size, nullptr, &consumed);
+    if (!packet) return false;
     UasMetadata m;
-    std::vector<std::pair<std::uint32_t, std::pair<std::size_t, std::size_t>>> items;
-    while (pos < end) {
-        std::uint32_t tag = 0;
-        std::size_t len = 0;
-        if (!readTag(p, end, pos, tag) || !readBer(p, end, pos, len) || pos + len > end) return false;
-        items.push_back({tag, {pos, len}});
-        if (tag == 1 && len == 2) m.checksumOk = static_cast<std::uint16_t>((p[pos] << 8) | p[pos + 1]) == bcc16(p, pos);
-        pos += len;
-    }
-    for (const auto& [tag, span] : items)
-        if (tag == 23 || tag == 24) apply(m, tag, p + span.first, span.second);
-    for (const auto& [tag, span] : items)
-        if (tag != 23 && tag != 24) apply(m, tag, p + span.first, span.second);
+    m.checksumOk = true;
+    misb::klv::Items items = packet->items();
+    for (const auto& item : items)
+        if (item.tag == 23 || item.tag == 24) apply(m, item.tag, item.value.data(), item.value.size());
+    for (const auto& item : items)
+        if (item.tag != 23 && item.tag != 24) apply(m, item.tag, item.value.data(), item.value.size());
+    if (items.error() != misb::Error::none) return false;
     out = std::move(m);
     return true;
 }

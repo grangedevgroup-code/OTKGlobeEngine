@@ -61,7 +61,11 @@ FetchContent_Declare(cgltf
     URL https://raw.githubusercontent.com/jkuhlmann/cgltf/v1.15/cgltf.h
     DOWNLOAD_NO_EXTRACT TRUE
     SOURCE_SUBDIR none)
-FetchContent_MakeAvailable(sokol stb json miniz earcut cgltf)
+FetchContent_Declare(misb
+    URL https://raw.githubusercontent.com/Mattbusel/misb/v0.4.1/cpp/misb.hpp
+    DOWNLOAD_NO_EXTRACT TRUE
+    SOURCE_SUBDIR none)
+FetchContent_MakeAvailable(sokol stb json miniz earcut cgltf misb)
 add_library(otk_miniz STATIC ${miniz_SOURCE_DIR}/miniz.c)
 target_include_directories(otk_miniz PUBLIC ${miniz_SOURCE_DIR})
 set(PUGIXML_NO_EXCEPTIONS ON CACHE BOOL "" FORCE)

@@ -47,7 +47,8 @@ target_include_directories(otk_kernel
         ${stb_SOURCE_DIR}
         ${json_SOURCE_DIR}
         ${earcut_SOURCE_DIR}
-        ${cgltf_SOURCE_DIR})
+        ${cgltf_SOURCE_DIR}
+        ${misb_SOURCE_DIR})
 target_link_libraries(otk_kernel PRIVATE otk_sqlite pugixml::pugixml otk_miniz)
 
 if(WIN32)
