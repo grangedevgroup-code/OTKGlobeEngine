@@ -20,3 +20,5 @@ __pycache__/
 /bindings/web/dist/
 /bindings/web/LICENSE
 /bindings/web/node_modules/
+/.build/
+/.swiftpm/
