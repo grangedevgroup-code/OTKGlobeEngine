@@ -1,0 +1,4 @@
+module OTKGlobeEngineC {
+    header "../../../include/otk/otk.h"
+    export *
+}
