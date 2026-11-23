@@ -136,6 +136,8 @@ jobs:
           echo '}' >> build/swiftcheck/module.modulemap
           xcrun --sdk macosx swiftc -typecheck -target arm64-apple-macos12 -I build/swiftcheck bindings/apple/OTKGlobeView.swift
           xcrun --sdk iphoneos swiftc -typecheck -target arm64-apple-ios15.0 -I build/swiftcheck bindings/apple/OTKGlobeView.swift
+      - name: Build the Swift package
+        run: swift build
       - run: cd build/apple && zip -qry OTKGlobeEngine.xcframework.zip OTKGlobeEngine.xcframework
       - uses: actions/upload-artifact@v4
         with:
