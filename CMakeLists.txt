@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
-project(OTKGlobeEngine VERSION 0.1.4 LANGUAGES C CXX)
+project(OTKGlobeEngine VERSION 0.1.5 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -63,6 +63,7 @@ FetchContent_Declare(cgltf
     SOURCE_SUBDIR none)
 FetchContent_Declare(misb
     URL https://raw.githubusercontent.com/Mattbusel/misb/v0.4.1/cpp/misb.hpp
+    URL_HASH SHA256=45956840a38001450931403d27920b7ffdda1a29cd6b2fbf1b0f45aa7c37119d
     DOWNLOAD_NO_EXTRACT TRUE
     SOURCE_SUBDIR none)
 FetchContent_MakeAvailable(sokol stb json miniz earcut cgltf misb)
