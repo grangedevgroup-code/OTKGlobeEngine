@@ -14,6 +14,7 @@ The libraries and data built into the engine keep their own licenses. Most are p
 | [miniz](https://github.com/richgel999/miniz) | KMZ, data packages, .3tz | MIT | License text |
 | [earcut.hpp](https://github.com/mapbox/earcut.hpp) | Polygon triangulation | ISC | License text |
 | [cgltf](https://github.com/jkuhlmann/cgltf) | glTF parsing | MIT | License text |
+| [misb](https://github.com/Mattbusel/misb) | MISB ST 0601 KLV decoding | MIT or Apache-2.0 | License text |
 | [meshoptimizer](https://github.com/zeux/meshoptimizer) decoder | `EXT_meshopt_compression` | MIT | License text; leave out with `-DOTK_WITH_MESHOPT=OFF` |
 | [Draco](https://github.com/google/draco) decoder | `KHR_draco_mesh_compression`, Draco point clouds | Apache-2.0 | License text; leave out with `-DOTK_WITH_DRACO=OFF` |
 | [Basis Universal](https://github.com/BinomialLLC/basis_universal) transcoder and its Zstandard decoder | KTX2 / `KHR_texture_basisu` | Apache-2.0, Zstandard BSD-3-Clause | License texts; leave out with `-DOTK_WITH_KTX2=OFF` |
