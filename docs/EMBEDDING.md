@@ -11,7 +11,7 @@ To save battery, ask `otk_next_frame_delay` how long you can wait before the nex
 Packages:
 
 - Android: `python scripts/android_aar.py` builds `build/otkglobeengine-<version>.aar` (arm64-v8a, armeabi-v7a, x86_64) containing `com.otkglobeengine.OTKGlobeView`, a ready-made `GLSurfaceView` with ATAK-style gestures, and `OTKGlobeEngine` with the full native API.
-- iOS, iPadOS, macOS: `bash scripts/apple_xcframework.sh` (on a Mac; CI publishes it as an artifact) builds `OTKGlobeEngine.xcframework` with the `OTKGlobeEngineC` module. Add `bindings/apple/OTKGlobeView.swift` for a ready-made `MTKView` with gestures.
+- iOS, iPadOS, macOS: `bash scripts/apple_xcframework.sh` (on a Mac; CI publishes it as an artifact) builds `OTKGlobeEngine.xcframework` with the `OTKGlobeEngineC` module. Add `bindings/apple/OTKGlobeView.swift` for a ready-made `MTKView` with gestures, or add this repository as a Swift package and use its `OTKGlobeView` library next to the xcframework.
 - .NET: `bindings/dotnet/OTKGlobeEngine.csproj` wraps the C ABI (`Engine`, `Native`); ship `otkglobeengine_c.dll`/`.so`/`.dylib` next to the app.
 
 Two APIs are available:
