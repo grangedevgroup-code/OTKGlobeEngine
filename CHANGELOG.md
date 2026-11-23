@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.5
+
+### Military formats
+- MISB ST 0601 KLV packets are now decoded with the [misb](https://github.com/Mattbusel/misb) library. A packet whose checksum is wrong or missing is rejected instead of being returned with `checksumOk` set to false.
+
+### Apple
+- The repository is a Swift package. Add it in Xcode or `Package.swift` and use its `OTKGlobeView` library next to `OTKGlobeEngine.xcframework`.
+
 ## 0.1.4
 
 ### Loading
